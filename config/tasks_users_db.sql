@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2024 a las 17:45:18
+-- Tiempo de generación: 02-01-2025 a las 00:51:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `status` enum('pendiente','completada') DEFAULT 'pendiente',
-  `deadline` datetime DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+                         `id` int(11) NOT NULL,
+                         `user_id` int(11) NOT NULL,
+                         `title` varchar(100) NOT NULL,
+                         `description` text DEFAULT NULL,
+                         `status` enum('pendiente','completada','en_progreso') DEFAULT 'pendiente',
+                         `deadline` datetime DEFAULT NULL,
+                         `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+                         `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -43,11 +43,11 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `user_id`, `title`, `description`, `status`, `deadline`, `created_at`, `updated_at`) VALUES
-(12, 18, 'Planificar estrategia de marketing', 'Desarrollar una estrategia completa de marketing para el próximo trimestre.', 'pendiente', '2025-01-15 10:00:00', '2024-12-29 16:44:41', '2024-12-29 16:44:41'),
-(13, 18, 'Revisar informes financieros', 'Analizar los informes financieros del último mes y preparar un resumen ejecutivo.', 'pendiente', '2024-12-31 17:00:00', '2024-12-29 16:44:41', '2024-12-29 16:44:41'),
-(14, 18, 'Implementar nuevo sistema CRM', 'Configurar el nuevo sistema CRM y migrar los datos existentes.', 'completada', '2024-12-28 18:00:00', '2024-12-29 16:44:41', '2024-12-29 16:44:41'),
-(15, 19, 'Desarrollar módulo de facturación', 'Crear un nuevo módulo de facturación para la aplicación web.', 'pendiente', '2025-02-28 17:00:00', '2024-12-29 16:44:42', '2024-12-29 16:44:42'),
-(16, 19, 'Corregir errores en la aplicación móvil', 'Identificar y corregir los errores reportados por los usuarios en la aplicación móvil.', 'pendiente', '2024-12-30 12:00:00', '2024-12-29 16:44:42', '2024-12-29 16:44:42');
+                                                                                                                    (12, 18, 'Planificar estrategia de marketing', 'Desarrollar una estrategia completa de marketing para el próximo trimestre.', 'completada', '2025-01-16 10:00:00', '2024-12-29 16:44:41', '2025-01-01 20:16:37'),
+                                                                                                                    (13, 18, 'Revisar informes financieros', 'Analizar los informes financieros del último mes y preparar un resumen ejecutivo.', 'en_progreso', '2025-01-20 10:00:00', '2024-12-29 16:44:41', '2025-01-01 22:42:30'),
+                                                                                                                    (19, 29, 'Montar servicion en aws', 'Hacer funcional el api en Amazon web services', 'completada', '2025-01-16 18:02:40', '2025-01-01 22:11:16', '2025-01-02 05:05:08'),
+                                                                                                                    (20, 29, 'Crear planificacion mensual', 'Planificar las tareas del mes proximo', 'completada', '2025-01-21 18:02:46', '2025-01-01 22:13:17', '2025-01-01 23:02:51'),
+                                                                                                                    (21, 29, 'Generar backend en java', 'Crear un microservicio para la gestión de libros', 'pendiente', '2025-01-31 18:07:00', '2025-01-01 23:07:22', '2025-01-01 23:07:22');
 
 -- --------------------------------------------------------
 
@@ -56,12 +56,12 @@ INSERT INTO `tasks` (`id`, `user_id`, `title`, `description`, `status`, `deadlin
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `role` enum('administrador','trabajador') NOT NULL DEFAULT 'trabajador'
+                         `id` int(11) NOT NULL,
+                         `name` varchar(100) NOT NULL,
+                         `email` varchar(100) NOT NULL,
+                         `password` varchar(255) NOT NULL,
+                         `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+                         `role` enum('administrador','trabajador') NOT NULL DEFAULT 'trabajador'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -69,8 +69,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `role`) VALUES
-(18, 'Juan Pérez', 'juan.perez@example.com', '$2y$10$eLLKHmKLtz7YKTVZSZn27u4ofmH/Nbl6L9Vifap.2tfABzqoST47y', '2024-12-29 22:31:02', 'administrador'),
-(19, 'Enrique Pérez', 'enrique.perez@example.com', '$2y$10$z8XI5odYO8OVlnk7tOfjaO6rPz2f0aJ9GAO54LTS7oFdxPFIsQILm', '2024-12-29 22:33:26', 'trabajador');
+                                                                                  (18, 'Juan Luis Pérez', 'Juan.perez@example.com', '$2y$10$cMCv.jqN.kvjS0VA1cWAveH21YI4PEqwTR3xtqP8IPM32Vi/jioSW', '2024-12-29 22:31:02', 'administrador'),
+                                                                                  (21, 'Carlos Sánchez', 'carlos.sanchez@example.com', '$2y$10$u9tTRbVPK0NrgiAS5fdm4.w0HtYDtEhDTOX/Cr9dt.5PYFHKUB2jC', '2025-01-01 20:24:32', 'administrador'),
+                                                                                  (29, 'Enrique Cerezo', 'enrique.cerezo@example.com', '$2y$10$KIro9ea4VDIg3fQj.vnX.uX1hNLLqFuVckqAO6HE1OO.Toi1Rez3y', '2025-01-02 03:41:42', 'trabajador');
 
 --
 -- Índices para tablas volcadas
@@ -80,14 +81,14 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `role`) VA
 -- Indices de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -98,13 +99,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
@@ -114,7 +115,7 @@ ALTER TABLE `users`
 -- Filtros para la tabla `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+    ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
